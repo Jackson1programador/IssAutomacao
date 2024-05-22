@@ -8,17 +8,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity
 @Table(name = "tb_permissao")
 public class Permissao {
 
+	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -29,19 +33,24 @@ public class Permissao {
 	@NotBlank
 	private String descricao;
 	
+	 
 	 @ManyToMany
 	    @JoinTable(
-	        name = "tb_grupo_permissao_permissao" //,
-	        //joinColumns = @JoinColumn(name = "permissao_id"),
-	        //inverseJoinColumns = @JoinColumn(name = "grupo_permissao_id")
-	    )
+	        name = "tb_grupo_permissao_permissao", 
+	        joinColumns = {
+	        		@JoinColumn(name = "id_permissao"),
+	        		
+	        }, inverseJoinColumns = {
+	        		@JoinColumn(name = "id_grupo_permissao")
+	        })
 	private Set<GrupoPermissao> grupoPermissoes = new HashSet<>();
 	 
-	 public void addGrupoPermissoes(GrupoPermissao grupoPermissao) {
-		 grupoPermissoes.add(grupoPermissao);
+
+		@Override
+		public String toString() {
+			return "Permissao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", grupoPermissoes="
+					+ "NÃO POSSO INCLUIR INFORMACAO NESSE CAMPO, SE NÃO ELE ENTRA EM UM LUP INFINITO" + "]";
 		}
 		
-		public void removeGrupoPermissoes(GrupoPermissao grupoPermissao) {
-			grupoPermissoes.remove(grupoPermissao);
-		}
+		
 }
