@@ -12,9 +12,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity
@@ -37,6 +39,10 @@ public class GrupoPermissao {
 	public String toString() {
 		return "GrupoPermissao [id=" + id + ", nome=" + nome + ", permissoes=" + "NÃO POSSO INCLUIR INFORMACAO NESSE CAMPO, SE NÃO ELE ENTRA EM UM LUP INFINITO" + "]";
 	}
+	
+	
+	
+	
 	
 	
 }
