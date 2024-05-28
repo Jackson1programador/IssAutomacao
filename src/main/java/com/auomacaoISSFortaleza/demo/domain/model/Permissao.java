@@ -53,6 +53,11 @@ public class Permissao {
 			return "Permissao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", grupoPermissoes="
 					+ "NÃO POSSO INCLUIR INFORMACAO NESSE CAMPO, SE NÃO ELE ENTRA EM UM LUP INFINITO" + "]";
 		}
+
+
+		public Permissao() {
+			super();
+		}
 		
 		
 }

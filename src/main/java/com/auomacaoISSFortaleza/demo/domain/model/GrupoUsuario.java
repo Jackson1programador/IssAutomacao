@@ -3,14 +3,12 @@ package com.auomacaoISSFortaleza.demo.domain.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,9 +18,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 @Entity
-@Table(name = "tb_grupo_permissao")
-public class GrupoPermissao {
-
+@Table(name = "tb_grupo_usuario")
+public class GrupoUsuario {
+	
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,22 +29,19 @@ public class GrupoPermissao {
 	@NotBlank
 	private String nome;
 	
-	@JsonIgnore
-	@ManyToMany(mappedBy = "grupoPermissoes")
-	private Set<Permissao> permissoes = new HashSet<>();
+	@Transient
+	private Set<Usuario> usuarios = new HashSet<>();
 
 	@Override
 	public String toString() {
-		return "GrupoPermissao [id=" + id + ", nome=" + nome + ", permissoes=" + "NÃO POSSO INCLUIR INFORMACAO NESSE CAMPO, SE NÃO ELE ENTRA EM UM LUP INFINITO" + "]";
+		return "GrupoUsuario [id=" + id + ", nome=" + nome + "]";
 	}
 
-	public GrupoPermissao() {
+	public GrupoUsuario() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	
-	
-	
-	
-	
+
 }
