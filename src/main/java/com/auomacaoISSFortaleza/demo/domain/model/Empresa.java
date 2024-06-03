@@ -1,12 +1,40 @@
 package com.auomacaoISSFortaleza.demo.domain.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Data
+@Entity
+@Table(name = "tb_empresa")
 public class Empresa {
 
+	@Id
+	@EqualsAndHashCode.Include
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank
 	private String nome;
+	
+	@NotBlank
 	private String cnpj;
+	
+	@NotBlank
 	private String inscricaoMunicipal;
+	
+	@NotBlank
 	private String cpfLogin;
+	
+	@NotBlank
 	private String senhaIssFortaleza;
 	
 	private boolean isForAceiteDosServicosTomados;
@@ -49,4 +77,11 @@ public class Empresa {
 	public void logarISSFortaleza() {
 		
 	}
+
+	public Empresa() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 }

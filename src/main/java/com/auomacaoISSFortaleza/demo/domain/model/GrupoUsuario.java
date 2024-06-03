@@ -3,12 +3,13 @@ package com.auomacaoISSFortaleza.demo.domain.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,7 +30,7 @@ public class GrupoUsuario {
 	@NotBlank
 	private String nome;
 	
-	@Transient
+	@OneToMany(mappedBy = "grupoUsuario", cascade = CascadeType.ALL)
 	private Set<Usuario> usuarios = new HashSet<>();
 
 	@Override

@@ -3,10 +3,13 @@ package com.auomacaoISSFortaleza.demo.domain.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
@@ -31,6 +34,10 @@ public class GrupoEmpresa {
 	
 	@Transient
 	private Set<Empresa> empresas = new HashSet<>();
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "grupoEmpresa")
+	private Set<Usuario> usuarios = new HashSet<>();
 	
 	
 	

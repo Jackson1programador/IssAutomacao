@@ -34,6 +34,12 @@ public class GrupoPermissao {
 	@JsonIgnore
 	@ManyToMany(mappedBy = "grupoPermissoes")
 	private Set<Permissao> permissoes = new HashSet<>();
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "grupoPermissao")
+	private Set<Usuario> usuarios = new HashSet<>();
+	
+	
 
 	@Override
 	public String toString() {

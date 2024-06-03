@@ -4,8 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,34 +33,35 @@ public class Usuario {
 	@NotBlank
 	private String senha;
 	
-	@Transient
+	@ManyToOne
+    @JoinColumn(name = "grupo_empresa_id")
 	private GrupoEmpresa grupoEmpresa;
 	
-	@Transient
+	@ManyToOne
+    @JoinColumn(name = "grupo_permissoes_id")
 	private GrupoPermissao grupoPermissao;
 	
-	@Transient
+	@ManyToOne
+    @JoinColumn(name = "grupo_usuarios_id")
 	private GrupoUsuario grupoUsuario;
+	
+	
+	
+	
 	
 	public void alteraSenha (String novaSenha) {
 		
 	}
-	
-	
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
 	}
 
-
-
 	public Usuario() {
 		super();
 		// TODO Auto-generated constructor stu
 	}
-
-
 
 	public Usuario(Long id, @NotBlank String nome, @NotBlank String email, @NotBlank String senha) {
 		super();

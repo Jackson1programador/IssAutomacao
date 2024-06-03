@@ -8,11 +8,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.auomacaoISSFortaleza.demo.domain.model.Empresa;
 import com.auomacaoISSFortaleza.demo.domain.model.GrupoEmpresa;
 import com.auomacaoISSFortaleza.demo.domain.model.GrupoPermissao;
 import com.auomacaoISSFortaleza.demo.domain.model.GrupoUsuario;
 import com.auomacaoISSFortaleza.demo.domain.model.Permissao;
 import com.auomacaoISSFortaleza.demo.domain.model.Usuario;
+import com.auomacaoISSFortaleza.demo.domain.repository.EmpresaRepository;
 import com.auomacaoISSFortaleza.demo.domain.repository.GrupoEmpresaRepository;
 import com.auomacaoISSFortaleza.demo.domain.repository.GrupoPermissaoRepository;
 import com.auomacaoISSFortaleza.demo.domain.repository.GrupoUsuarioRepository;
@@ -37,15 +39,18 @@ public class ConfigTest implements CommandLineRunner{
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private EmpresaRepository empresaRepository;
 
 
 	@Override
 	public void run(String... args) throws Exception {
 		
 		//adicionei grupo permissao no banco de dados para testes
-		GrupoPermissao gp1 = new GrupoPermissao(null, "ADM", new HashSet<>());
-		GrupoPermissao gp2 = new GrupoPermissao(null, "Cordenaodor", new HashSet<>());
-		GrupoPermissao gp3 = new GrupoPermissao(null, "Executor", new HashSet<>());
+		GrupoPermissao gp1 = new GrupoPermissao(null, "ADM", new HashSet<>(), new HashSet<>() );
+		GrupoPermissao gp2 = new GrupoPermissao(null, "Cordenaodor", new HashSet<>(), new HashSet<>());
+		GrupoPermissao gp3 = new GrupoPermissao(null, "Executor", new HashSet<>(), new HashSet<>());
 		grupoPermissaoRepository.saveAll(Arrays.asList(gp1, gp2, gp3));
 		
 		//adicionei permissao no banco de dados para testes
@@ -69,9 +74,9 @@ public class ConfigTest implements CommandLineRunner{
 		
 		
 		//adicionei grupo empresa no banco de dados para testes
-		GrupoEmpresa ge1 = new GrupoEmpresa(null, "Coordenaodor jackson", new HashSet<>());
-		GrupoEmpresa ge2 = new GrupoEmpresa(null, "gerente jackson", new HashSet<>());
-		GrupoEmpresa ge3 = new GrupoEmpresa(null, "ADM Master jackson", new HashSet<>());
+		GrupoEmpresa ge1 = new GrupoEmpresa(null, "Coordenaodor jackson", new HashSet<>(), new HashSet<>());
+		GrupoEmpresa ge2 = new GrupoEmpresa(null, "gerente jackson", new HashSet<>(), new HashSet<>());
+		GrupoEmpresa ge3 = new GrupoEmpresa(null, "ADM Master jackson", new HashSet<>(), new HashSet<>());
 		grupoEmpresaRepository.saveAll(Arrays.asList(ge1, ge2, ge3));
 		
 		//adicionei usuario no banco de dados para testes
@@ -80,4 +85,42 @@ public class ConfigTest implements CommandLineRunner{
 		Usuario u3 = new Usuario(null, "Jack", "jack@gmail.com", "senha123");
 		usuarioRepository.saveAll(Arrays.asList(u1, u2, u3));
 		
+		//associar grupo de usuario a um usuario
+		u1.setGrupoUsuario(gu1);
+		u2.setGrupoUsuario(gu3);
+		u3.setGrupoUsuario(gu1);
+		usuarioRepository.saveAll(Arrays.asList(u1, u2, u3));
+		gu1.getUsuarios().add(u1);
+		gu2.getUsuarios().add(u3);
+		gu3.getUsuarios().add(u2);
+		grupoEmpresaRepository.saveAll(Arrays.asList(ge1, ge2, ge3));
+		
+		
+		//associar grupo de permissoes a um usuario
+		u1.setGrupoPermissao(gp1);
+		u2.setGrupoPermissao(gp2);
+		u3.setGrupoPermissao(gp3);
+		usuarioRepository.saveAll(Arrays.asList(u1, u2, u3));
+		gp1.getUsuarios().add(u1);
+		gp2.getUsuarios().add(u2);
+		gp3.getUsuarios().add(u3);
+		grupoPermissaoRepository.saveAll(Arrays.asList(gp1, gp2, gp3));
+		
+		
+		//associar grupo de empresa a um usuario
+		u1.setGrupoEmpresa(ge1);
+		u2.setGrupoEmpresa(ge2);
+		u3.setGrupoEmpresa(ge3);
+		usuarioRepository.saveAll(Arrays.asList(u1, u2, u3));
+		ge1.getUsuarios().add(u1);
+		ge2.getUsuarios().add(u2);
+		ge3.getUsuarios().add(u3);
+		grupoEmpresaRepository.saveAll(Arrays.asList(ge1, ge2, ge3));
+		
+		
+		//crianda entidade empresa
+		Empresa e1 = new Empresa (null, "nome", "cnpj", "inscricao municpal", "cpfLogin", "senha iss fortaleza", true, true, true, true, true, true, true );
+		Empresa e2 = new Empresa (null, "jackson", "123123123", "123", "123", "123", true, true, true, true, true, true, true );
+		Empresa e3 = new Empresa (null, "jack", "987987", "987", "987", "987", true, true, true, true, true, true, true );
+		empresaRepository.saveAll(Arrays.asList(e1, e2, e3));
 	}}
