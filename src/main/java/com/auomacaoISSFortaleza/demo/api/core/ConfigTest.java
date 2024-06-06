@@ -8,12 +8,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.auomacaoISSFortaleza.demo.domain.model.Cliente;
 import com.auomacaoISSFortaleza.demo.domain.model.Empresa;
 import com.auomacaoISSFortaleza.demo.domain.model.GrupoEmpresa;
 import com.auomacaoISSFortaleza.demo.domain.model.GrupoPermissao;
 import com.auomacaoISSFortaleza.demo.domain.model.GrupoUsuario;
 import com.auomacaoISSFortaleza.demo.domain.model.Permissao;
 import com.auomacaoISSFortaleza.demo.domain.model.Usuario;
+import com.auomacaoISSFortaleza.demo.domain.repository.ClienteRepository;
 import com.auomacaoISSFortaleza.demo.domain.repository.EmpresaRepository;
 import com.auomacaoISSFortaleza.demo.domain.repository.GrupoEmpresaRepository;
 import com.auomacaoISSFortaleza.demo.domain.repository.GrupoPermissaoRepository;
@@ -42,10 +44,20 @@ public class ConfigTest implements CommandLineRunner{
 	
 	@Autowired
 	private EmpresaRepository empresaRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
 
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		//criando cliente
+		Cliente c1 = new Cliente(null, "formma", "121231413424");
+		Cliente c2 = new Cliente(null, "P&P", "121231413424");
+		Cliente c3 = new Cliente(null, "Map", "121231413424");
+		clienteRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
 		
 		//adicionei grupo permissao no banco de dados para testes
 		GrupoPermissao gp1 = new GrupoPermissao(null, "ADM", new HashSet<>(), new HashSet<>() );
@@ -75,8 +87,8 @@ public class ConfigTest implements CommandLineRunner{
 		
 		//adicionei grupo empresa no banco de dados para testes
 		GrupoEmpresa ge1 = new GrupoEmpresa(null, "Coordenaodor jackson", new HashSet<>(), new HashSet<>());
-		GrupoEmpresa ge2 = new GrupoEmpresa(null, "gerente jackson", new HashSet<>(), new HashSet<>());
-		GrupoEmpresa ge3 = new GrupoEmpresa(null, "ADM Master jackson", new HashSet<>(), new HashSet<>());
+		GrupoEmpresa ge2 = new GrupoEmpresa(null, "coordenador jack", new HashSet<>(), new HashSet<>());
+		GrupoEmpresa ge3 = new GrupoEmpresa(null, "coordenador jackgol", new HashSet<>(), new HashSet<>());
 		grupoEmpresaRepository.saveAll(Arrays.asList(ge1, ge2, ge3));
 		
 		//adicionei usuario no banco de dados para testes
@@ -119,8 +131,23 @@ public class ConfigTest implements CommandLineRunner{
 		
 		
 		//crianda entidade empresa
-		Empresa e1 = new Empresa (null, "nome", "cnpj", "inscricao municpal", "cpfLogin", "senha iss fortaleza", true, true, true, true, true, true, true );
-		Empresa e2 = new Empresa (null, "jackson", "123123123", "123", "123", "123", true, true, true, true, true, true, true );
-		Empresa e3 = new Empresa (null, "jack", "987987", "987", "987", "987", true, true, true, true, true, true, true );
+		Empresa e1 = new Empresa (null, "nome", "cnpj", "inscricao municpal", "cpfLogin", "senha iss fortaleza", null, true, true, true, true, true, true, true );
+		Empresa e2 = new Empresa (null, "jackson", "123123123", "123", "123", "123", null, true, true, true, true, true, true, true );
+		Empresa e3 = new Empresa (null, "jack", "987987", "987", "987", "987", null, true, true, true, true, true, true, true );
 		empresaRepository.saveAll(Arrays.asList(e1, e2, e3));
+		
+		
+		//associar grupo de empresa a um empresa
+		e1.setGrupoEmpresa(ge1);
+		e2.setGrupoEmpresa(ge2);
+		e3.setGrupoEmpresa(ge3);
+		empresaRepository.saveAll(Arrays.asList(e1, e2, e3));
+		ge1.getEmpresas().add(e1);
+		ge2.getEmpresas().add(e2);
+		ge3.getEmpresas().add(e3);
+		grupoEmpresaRepository.saveAll(Arrays.asList(ge1, ge2, ge3));
+		
+		
+		
+		
 	}}
