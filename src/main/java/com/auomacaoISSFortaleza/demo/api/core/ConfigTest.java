@@ -1,5 +1,6 @@
 package com.auomacaoISSFortaleza.demo.api.core;
 
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -129,11 +130,14 @@ public class ConfigTest implements CommandLineRunner{
 		ge3.getUsuarios().add(u3);
 		grupoEmpresaRepository.saveAll(Arrays.asList(ge1, ge2, ge3));
 		
+		OffsetDateTime data1 = OffsetDateTime.now();
+		OffsetDateTime data2 = OffsetDateTime.now();
+		OffsetDateTime data3 = OffsetDateTime.now();
 		
 		//crianda entidade empresa
-		Empresa e1 = new Empresa (null, "nome", "cnpj", "inscricao municpal", "cpfLogin", "senha iss fortaleza", null, true, true, true, true, true, true, true );
-		Empresa e2 = new Empresa (null, "jackson", "123123123", "123", "123", "123", null, true, true, true, true, true, true, true );
-		Empresa e3 = new Empresa (null, "jack", "987987", "987", "987", "987", null, true, true, true, true, true, true, true );
+		Empresa e1 = new Empresa (null, "nome", "cnpj", "inscricao municpal", "cpfLogin", "senha iss fortaleza", null, null, data1,  true, true, true, true, true, true, true );
+		Empresa e2 = new Empresa (null, "jackson", "123123123", "123", "123", "123", null, null, data2, true, true, true, true, true, true, true );
+		Empresa e3 = new Empresa (null, "jack", "987987", "987", "987", "987", null, null, data3, true, true, true, true, true, true, true );
 		empresaRepository.saveAll(Arrays.asList(e1, e2, e3));
 		
 		
@@ -147,6 +151,26 @@ public class ConfigTest implements CommandLineRunner{
 		ge3.getEmpresas().add(e3);
 		grupoEmpresaRepository.saveAll(Arrays.asList(ge1, ge2, ge3));
 		
+		
+		//associar cliente a um usuario
+		u1.setCliente(c1);
+		u2.setCliente(c2);
+		u3.setCliente(c3);
+		usuarioRepository.saveAll(Arrays.asList(u1, u2, u3));
+		c1.getUsuarios().add(u1);
+		c2.getUsuarios().add(u2);
+		c3.getUsuarios().add(u3);
+		clienteRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		//associar cliente a uma empresa
+		e1.setCliente(c1);
+		e2.setCliente(c2);
+		e3.setCliente(c3);
+		empresaRepository.saveAll(Arrays.asList(e1, e2, e3));
+		c1.getEmpresas().add(e1);
+		c2.getEmpresas().add(e2);
+		c3.getEmpresas().add(e3);
+		clienteRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
 		
 		

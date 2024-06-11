@@ -1,5 +1,10 @@
 package com.auomacaoISSFortaleza.demo.domain.model;
 
+import java.time.OffsetDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,6 +47,14 @@ public class Empresa {
 	@ManyToOne
     @JoinColumn(name = "grupo_empresa_id")
 	private GrupoEmpresa grupoEmpresa;
+	
+	@ManyToOne
+    @JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+	
+	@CreationTimestamp
+	@Column(nullable = false, columnDefinition = "datetime")
+	private OffsetDateTime dataCadastro;
 	
 	private boolean isForAceiteDosServicosTomados;
 	private boolean isForEncerrarPeriodo;
