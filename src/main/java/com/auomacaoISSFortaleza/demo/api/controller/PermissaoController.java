@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.auomacaoISSFortaleza.demo.api.assembler.PermissaoDtoAsembler;
-import com.auomacaoISSFortaleza.demo.api.assembler.PermissaoDtoDesasembler;
+import com.auomacaoISSFortaleza.demo.api.assembler.PermissaoDtoAssembler;
+import com.auomacaoISSFortaleza.demo.api.assembler.PermissaoDtoDesassembler;
 import com.auomacaoISSFortaleza.demo.api.model.input.PermissaoInputDTO;
 import com.auomacaoISSFortaleza.demo.api.model.output.PermissaoOutputDTO;
 import com.auomacaoISSFortaleza.demo.domain.model.Permissao;
@@ -31,10 +31,10 @@ public class PermissaoController {
 	private PermissaoService permissaoService;
 	
 	@Autowired
-	private PermissaoDtoAsembler permissaoDtoAsembler;
+	private PermissaoDtoAssembler permissaoDtoAsembler;
 	
 	@Autowired
-	private PermissaoDtoDesasembler permissaoDtoDesasembler;
+	private PermissaoDtoDesassembler permissaoDtoDesasembler;
 	
 	
 	@PostMapping()

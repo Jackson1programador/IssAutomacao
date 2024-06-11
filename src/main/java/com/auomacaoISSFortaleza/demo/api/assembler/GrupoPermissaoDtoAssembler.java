@@ -12,7 +12,7 @@ import com.auomacaoISSFortaleza.demo.domain.model.GrupoPermissao;
 
 
 @Component
-public class GrupoPermissaoDtoAsembler {
+public class GrupoPermissaoDtoAssembler {
 
 	@Autowired
 	private ModelMapper modelMapper;

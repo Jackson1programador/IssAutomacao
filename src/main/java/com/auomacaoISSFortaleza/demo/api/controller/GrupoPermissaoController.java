@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.auomacaoISSFortaleza.demo.api.assembler.GrupoPermissaoDtoAsembler;
-import com.auomacaoISSFortaleza.demo.api.assembler.GrupoPermissaoDtoDesasembler;
+import com.auomacaoISSFortaleza.demo.api.assembler.GrupoPermissaoDtoAssembler;
+import com.auomacaoISSFortaleza.demo.api.assembler.GrupoPermissaoDtoDesassembler;
 import com.auomacaoISSFortaleza.demo.api.model.input.GrupoPermissaoInputDTO;
 import com.auomacaoISSFortaleza.demo.api.model.output.GrupoPermissaoOutputDTO;
 import com.auomacaoISSFortaleza.demo.domain.model.GrupoPermissao;
@@ -32,10 +32,10 @@ public class GrupoPermissaoController {
 	private GrupoPermissaoService GrupoPermissaoService;
 	
 	@Autowired
-	private GrupoPermissaoDtoAsembler GrupoPermissaoDtoAsembler;
+	private GrupoPermissaoDtoAssembler GrupoPermissaoDtoAsembler;
 	
 	@Autowired
-	private GrupoPermissaoDtoDesasembler GrupoPermissaoDtoDesasembler;
+	private GrupoPermissaoDtoDesassembler GrupoPermissaoDtoDesasembler;
 	
 	
 	@PostMapping()

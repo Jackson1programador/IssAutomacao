@@ -11,7 +11,7 @@ import com.auomacaoISSFortaleza.demo.domain.model.Permissao;
 
 
 @Component
-public class PermissaoDtoDesasembler {
+public class PermissaoDtoDesassembler {
 
 	@Autowired
 	private ModelMapper modelMapper;
