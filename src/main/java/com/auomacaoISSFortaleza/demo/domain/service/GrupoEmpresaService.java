@@ -12,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.auomacaoISSFortaleza.demo.domain.exception.ExceptionEntidadeEmUso;
 import com.auomacaoISSFortaleza.demo.domain.exception.ExceptionResourceNotFound;
+import com.auomacaoISSFortaleza.demo.domain.model.Empresa;
 import com.auomacaoISSFortaleza.demo.domain.model.GrupoEmpresa;
+import com.auomacaoISSFortaleza.demo.domain.model.GrupoPermissao;
+import com.auomacaoISSFortaleza.demo.domain.model.Permissao;
 import com.auomacaoISSFortaleza.demo.domain.repository.GrupoEmpresaRepository;
 
 
@@ -25,9 +28,9 @@ public class GrupoEmpresaService {
 	@Autowired
 	private GrupoEmpresaRepository grupoEmpresaRepository;
 	
-	//@Autowired
-	//private PermissaoService permissaoService;
-	//
+	@Autowired
+	private EmpresaService empresaService;
+	
 	
 	public List<GrupoEmpresa> list () {
 		List<GrupoEmpresa> list = grupoEmpresaRepository.findAll();
@@ -64,22 +67,23 @@ public class GrupoEmpresaService {
 		}
 	}
 	
-	//@Transactional
-	//public void associarPermissaoAoGrupoPermissao (Long grupoPermissaoId, Long permissaoId) {
-	//	GrupoPermissao grupoPermissao = buscarOuFalhar(grupoPermissaoId);
-	//	Permissao permissao = permissaoService.buscarOuFalhar(permissaoId);
-	//	permissao.getGrupoPermissoes().add(grupoPermissao);	
-	//	permissaoService.salvar(permissao);
-	//}
+	@Transactional
+	public void associarEmpresaAoGrupoEmpresa (Long grupoEmpresaId, Long empresaId) {
+		GrupoEmpresa grupoEmpresa = buscarOuFalhar(grupoEmpresaId);
+		Empresa empresa = empresaService.buscarOuFalhar(empresaId);
+		grupoEmpresa.getEmpresas().add(empresa);
+		empresa.setGrupoEmpresa(grupoEmpresa);
+		empresaService.salvar(empresa);
+	}
 	
 	
-	//@Transactional
-	//public void desassociarPermissaoAoGrupoPermissao (Long grupoPermissaoId, Long permissaoId) {
-	//	GrupoPermissao grupoPermissao = buscarOuFalhar(grupoPermissaoId);
-	//	Permissao permissao = permissaoService.buscarOuFalhar(permissaoId);
-	//	permissao.getGrupoPermissoes().remove(grupoPermissao);	
-	//	permissaoService.salvar(permissao);
-	//}
+	@Transactional
+	public void desassociarEmpresaAoGrupoEmpresa (Long grupoEmpresaId, Long empresaId) {
+		GrupoEmpresa grupoEmpresa = buscarOuFalhar(grupoEmpresaId);
+		Empresa empresa = empresaService.buscarOuFalhar(empresaId);
+		//grupoEmpresa.getEmpresas().remove(empresa);
+		empresa.setGrupoEmpresa(null);
+	}
 	
 	public GrupoEmpresa buscarOuFalhar(Long grupoEmpresaId) {
 		return buscaPorId(grupoEmpresaId).orElseThrow(() -> new ExceptionResourceNotFound(String.format(MSG_GRUPO_EMPRESA_NAO_ENCONTRADA, grupoEmpresaId)));

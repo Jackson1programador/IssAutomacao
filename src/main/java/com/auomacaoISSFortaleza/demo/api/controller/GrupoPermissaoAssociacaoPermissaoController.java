@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auomacaoISSFortaleza.demo.domain.service.GrupoPermissaoService;
 
 @RestController
-@RequestMapping("/grupo-permissao")
+@RequestMapping("/grupo-permissao-associacao")
 public class GrupoPermissaoAssociacaoPermissaoController {
 
 	@Autowired
