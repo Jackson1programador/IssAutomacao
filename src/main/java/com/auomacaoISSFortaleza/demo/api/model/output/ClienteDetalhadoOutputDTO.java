@@ -1,10 +1,6 @@
 package com.auomacaoISSFortaleza.demo.api.model.output;
 
-import java.util.List;
 import java.util.Set;
-
-import com.auomacaoISSFortaleza.demo.domain.model.Empresa;
-import com.auomacaoISSFortaleza.demo.domain.model.Usuario;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +16,7 @@ public class ClienteDetalhadoOutputDTO {
 	private String cnpj;
 	
 	//incluir um DTO Usuario resumido
-	//private Set<Usuario> usuarios;
+	private Set<UsuarioOutputDTOresumido> usuariosDoCliente;
 
 	//incluir um DTO empresa resumido
 	//private List<Empresa> empresas;

@@ -2,11 +2,6 @@ package com.auomacaoISSFortaleza.demo.api.model.output;
 
 import java.time.OffsetDateTime;
 
-import com.auomacaoISSFortaleza.demo.domain.model.Cliente;
-import com.auomacaoISSFortaleza.demo.domain.model.GrupoEmpresa;
-import com.auomacaoISSFortaleza.demo.domain.model.GrupoPermissao;
-import com.auomacaoISSFortaleza.demo.domain.model.GrupoUsuario;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,9 +13,9 @@ public class UsuarioDetalhadoOutputDTO {
 	
 	private String nome;
 	
-	//private GrupoEmpresa grupoEmpresa;
+	private GrupoEmpresaOutputDTOresumido grupoEmpresa;
 	
-	//private GrupoPermissao grupoPermissao;
+	private GrupoPermissaoOutputDTOresumido grupoPermissao;
 	
 	//private GrupoUsuario grupoUsuario;
 	

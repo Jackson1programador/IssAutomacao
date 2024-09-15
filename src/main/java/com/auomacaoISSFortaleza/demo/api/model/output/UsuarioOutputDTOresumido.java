@@ -5,12 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PermissaoOutputDTOparaGrupoPermissaoOutputDTO {
+public class UsuarioOutputDTOresumido {
 
 	private Long id;
 	
 	private String nome;
-
-	private String descricao;
-		 
+	
 }

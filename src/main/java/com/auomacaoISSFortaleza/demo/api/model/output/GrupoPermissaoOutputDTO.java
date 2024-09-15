@@ -13,5 +13,5 @@ public class GrupoPermissaoOutputDTO {
 	
 	private String nome;
 	
-	private Set<PermissaoOutputDTOparaGrupoPermissaoOutputDTO> permissoes;
+	private Set<PermissaoOutputDTOresumido> permissoes;
 }

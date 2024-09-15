@@ -16,6 +16,7 @@ import com.auomacaoISSFortaleza.demo.domain.model.Empresa;
 import com.auomacaoISSFortaleza.demo.domain.model.GrupoEmpresa;
 import com.auomacaoISSFortaleza.demo.domain.model.GrupoPermissao;
 import com.auomacaoISSFortaleza.demo.domain.model.Permissao;
+import com.auomacaoISSFortaleza.demo.domain.model.Usuario;
 import com.auomacaoISSFortaleza.demo.domain.repository.GrupoEmpresaRepository;
 
 
@@ -30,6 +31,9 @@ public class GrupoEmpresaService {
 	
 	@Autowired
 	private EmpresaService empresaService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	
 	public List<GrupoEmpresa> list () {
@@ -83,6 +87,25 @@ public class GrupoEmpresaService {
 		Empresa empresa = empresaService.buscarOuFalhar(empresaId);
 		//grupoEmpresa.getEmpresas().remove(empresa);
 		empresa.setGrupoEmpresa(null);
+	}
+	
+	@Transactional
+	public void associarUsuarioAoGrupoEmpresa (Long grupoEmpresaId, Long usuarioId) {
+		GrupoEmpresa grupoEmpresa = buscarOuFalhar(grupoEmpresaId);
+		Usuario usuario = usuarioService.buscarOuFalhar(usuarioId);
+		grupoEmpresa.getUsuarios().add(usuario);
+		usuario.setGrupoEmpresa(grupoEmpresa);
+		usuarioService.salvar(usuario);
+		grupoEmpresaRepository.save(grupoEmpresa);
+	}
+	
+	
+	@Transactional
+	public void desassociarUsuarioAoGrupoEmpresa (Long grupoEmpresaId, Long usuarioId) {
+		GrupoEmpresa grupoEmpresa = buscarOuFalhar(grupoEmpresaId);
+		Usuario usuario = usuarioService.buscarOuFalhar(usuarioId);
+		////grupoEmpresa.getEmpresas().remove(empresa);
+		usuario.setGrupoEmpresa(null);
 	}
 	
 	public GrupoEmpresa buscarOuFalhar(Long grupoEmpresaId) {
