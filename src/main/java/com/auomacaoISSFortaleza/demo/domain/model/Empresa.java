@@ -58,9 +58,14 @@ public class Empresa {
 	
 	private boolean isForAceiteDosServicosTomados;
 	private boolean isForEncerrarPeriodo;
+	
+	//basta ser dowload so dos serviços***correção**
 	private boolean isForDowloadServiçosTomados;
 	private boolean isForDowloadServiçosPrestados;
+	
 	private boolean isForGeracaoDaGuia;
+	
+	// não vai funcionar de começo
 	private boolean isForResumoDoSimplesNacional;
 	private boolean isForEnviarEmail;
 	

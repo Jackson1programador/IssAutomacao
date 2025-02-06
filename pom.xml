@@ -67,6 +67,20 @@
 			  <version>2.3.0</version>
 		</dependency>
 		
+			  <!-- Dependência do Selenium WebDriver -->
+	    <dependency>
+	        <groupId>org.seleniumhq.selenium</groupId>
+	        <artifactId>selenium-java</artifactId>
+	        <version>4.10.0</version> <!-- Verifique a versão mais recente -->
+	    </dependency>
+	
+	    <!-- WebDriver Manager para gerenciar os drivers automaticamente -->
+	    <dependency>
+	        <groupId>io.github.bonigarcia</groupId>
+	        <artifactId>webdrivermanager</artifactId>
+	        <version>5.5.3</version> <!-- Verifique a versão mais recente -->
+	    </dependency>
+		
 	</dependencies>
 
 	<build>
