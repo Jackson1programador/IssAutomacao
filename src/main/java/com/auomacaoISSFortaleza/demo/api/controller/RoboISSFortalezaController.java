@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.auomacaoISSFortaleza.demo.domain.exception.CNPJNotFoundException;
 import com.auomacaoISSFortaleza.demo.robo.IssFortaleza;
 
 @RestController
@@ -20,7 +20,7 @@ public class RoboISSFortalezaController {
 	
 	@GetMapping(value="/{idEmpresa}/{idCliente}")
 	@ResponseStatus(value = HttpStatus.OK)
-	public void  encerrarIssFortaleza(@PathVariable Long idEmpresa, @PathVariable Long idCliente) {
+	public void  encerrarIssFortaleza(@PathVariable Long idEmpresa, @PathVariable Long idCliente) throws CNPJNotFoundException {
 		issFortaleza.executarEncerramento(idEmpresa, idCliente); 
 	}
 
